@@ -1,0 +1,35 @@
+@import "base";
+@import "styles";
+@import "design-tokens";
+
+body {
+  display: flex;
+  justify-content: start;
+  flex-direction: row-reverse;
+}
+
+main {
+  padding: 1rem 0 0 2rem;
+}
+
+aside {
+  color: $w;
+  width: 40%;
+  height: 100%;
+  background-color: $blue;
+  overflow: auto;
+  ul {
+    padding: 0.5rem 1rem;
+    li {
+      background-color: $blue;
+      padding: 1rem 2rem;
+      border-bottom: solid 3px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      &:last-child {
+        border: none;
+      }
+    }
+  }
+}

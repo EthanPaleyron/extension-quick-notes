@@ -15,6 +15,7 @@ $mail: #2d95f9;
 $error: #ff4136;
 $info: #ffdc00;
 $w: #fff;
+$wa: #ffffff1d;
 $b: #000;
 
 // 🔴Other-Colors
@@ -70,4 +71,9 @@ h3 {
 %button {
   padding: 0.8rem 1.8rem;
   border-radius: 3rem;
+}
+i {
+  font-size: 1rem;
+  filter: brightness(0) saturate(100%) invert(0%) sepia(81%) saturate(7481%)
+    hue-rotate(164deg) brightness(110%) contrast(101%);
 }

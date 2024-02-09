@@ -18,7 +18,10 @@ notepadList.querySelectorAll("li button").forEach((notepad, i) => {
   inputHiddenText.id = "text_" + i;
   const notepadTitle = document.createElement("span");
   notepadTitle.id = "notepadTitle_" + i;
-  notepadTitle.textContent = "Untitled";
+  notepadTitle.textContent = "New notepad";
+  const TitleNewNotepad = document.createElement("span");
+  notepadTitle.id = "notepadTitle_" + i;
+  notepadTitle.textContent = "New notepad";
   notepad.appendChild(inputHiddenTitle);
   notepad.appendChild(inputHiddenText);
   notepad.appendChild(notepadTitle);
@@ -36,20 +39,26 @@ notepadList.querySelectorAll("li button").forEach((notepad, i) => {
   });
 });
 
-
-document.querySelector("input").addEventListener("input", () => {
-  const title = document.querySelector("#title_" + idNotepad);
-  const text = document.querySelector("#text_" + idNotepad);
-  const notepadTitle = document.querySelector("#notepadTitle_" + idNotepad);
-  title.value = inputTitle.value;
-  text.value = inputText.value;
-  // Limite de carateres
-  if (inputTitle.value.length > 20) {
-    inputTitle.value = inputTitle.value.slice(0, 20);
-  }
-  if (inputTitle.value.trim() === "") {
-    notepadTitle.textContent = "Untitled";
-  } else {
-    notepadTitle.textContent = inputTitle.value;
-  }
+document.querySelectorAll(".inputs").forEach((input) => {
+  input.addEventListener("input", () => {
+    const title = document.querySelector("#title_" + idNotepad);
+    const text = document.querySelector("#text_" + idNotepad);
+    const notepadTitle = document.querySelector("#notepadTitle_" + idNotepad);
+    title.value = inputTitle.value;
+    text.value = inputText.value;
+    // Limite de carateres
+    if (inputTitle.value.length > 20) {
+      inputTitle.value = inputTitle.value.slice(0, 20);
+    }
+    if (inputTitle.value.trim() === "") {
+      notepadTitle.textContent = inputText.value;
+    } else if (inputText.value.trim() === "") {
+      notepadTitle.textContent = inputTitle.value;
+    } else if (
+      inputTitle.value.trim() === "" &&
+      inputText.value.trim() === ""
+    ) {
+      notepadTitle.textContent = "New notepad";
+    }
+  });
 });

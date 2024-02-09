@@ -2,24 +2,45 @@
 
 <head>
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://kit.fontawesome.com/2621df78fc.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
 
     <main>
-        <h1>Quick notes</h1>
+        <nav>
+            <button>
+                <pre><</pre>
+            </button>
+            <h1>Quick notes</h1>
+            <a href="pages/setting.html">setting</a>
+        </nav>
         <div>
             <div>
-                <input type="text" id="inputTitle" placeholder="Title">
-                <!-- <button>delete</button> -->
+                <button>Add title</button>
+                <!-- <input type="text" id="inputTitle" class="inputs" placeholder="Title"> -->
+                <button>delete</button>
+                <button>download</button>
             </div>
-            <input type="text" id="inputText" placeholder="Write here ...">
+            <nav>
+                <ul>
+                    <li><button>B</button></li>
+                    <li><button>I</button></li>
+                    <li><button>U</button></li>
+                    <li><button>S</button></li>
+                </ul>
+            </nav>
+            <input type="text" id="inputText" class="inputs" placeholder="Write here ...">
         </div>
     </main>
 
-    <aside>
-        <ul id="notepadList"></ul>
-        <button>+ New note</button>
+    <aside class="aside">
+        <input type="search" class="aside__search" placeholder="Search notepad">
+        <ul id="notepadList" class="aside__notepad_list">
+            <li><button></button></li>
+            <li><button></button></li>
+        </ul>
+        <button class="aside__new_note">+ New note</button>
     </aside>
 
     <script type="module" src="js/main.js"></script>

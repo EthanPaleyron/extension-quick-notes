@@ -12,24 +12,44 @@ main {
   padding: 1rem 0 0 2rem;
 }
 
-aside {
+.aside {
   color: $w;
   width: 40%;
-  height: 100%;
   background-color: $blue;
-  overflow: auto;
-  ul {
-    padding: 0.5rem 1rem;
+  padding: 0.7rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  &__search {
+    color: $b;
+    border-radius: 1rem;
+    padding: 0.2rem 1rem;
+    border: none;
+  }
+  &__notepad_list {
+    height: 80%;
+    padding: 0.5rem 0;
+    overflow: auto;
     li {
-      background-color: $blue;
-      padding: 1rem 2rem;
-      border-bottom: solid 3px;
+      height: max-content;
+      border-bottom: solid 2px;
+      padding: 0.3rem 0;
       display: flex;
       justify-content: center;
-      align-items: center;
+      button {
+        width: 95%;
+        padding: 0.5rem;
+        border-radius: 1rem;
+        &:hover {
+          background-color: $wa;
+        }
+      }
       &:last-child {
         border: none;
       }
     }
+  }
+  &__new_note {
+    flex: 1;
   }
 }

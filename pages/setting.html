@@ -1,19 +1,38 @@
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
     <script src="https://kit.fontawesome.com/2621df78fc.js" crossorigin="anonymous"></script>
+    <title>Setting</title>
 </head>
 
 <body>
 
-    <main>
-        <ul>
-            <li><label for="font-size">Font size :</label><input type="number" id="font-size"></li>
+    <main class="setting">
+        <a href="../index.html"><i class="fa-solid fa-arrow-left"></i></a>
+        <h1 class="setting__title">Setting</h1>
+        <textarea wrap="soft" placeholder="An example of your text"></textarea>
+        <h2>An example of your title</h2>
+        <ul class="setting__title__list">
             <li>
-                <label for="font-family">Font family :</label>
-                <select id="font-family">
-                    <option value="Roboto">Roboto</option>
+                <label for="font-size">Font size :</label>
+                <input type="number" id="fontSizeText">
+            </li>
+            <li>
+                <label for="fontFamily">Font family :</label>
+                <select id="fontFamily">
+                    <option class="font_Arial" value="Arial">Arial</option>
+                    <option class="font_Helvetica" value="Helvetica">Helvetica</option>
+                    <option class="font_Roboto" value="Roboto" selected>Roboto</option>
+                    <option class="font_OpenSans" value="Open Sans">Open Sans</option>
+                    <option class="font_Lato" value="Lato">Lato</option>
+                    <option class="font_Montserrat" value="Montserrat">Montserrat</option>
+                    <option class="font_Georgia" value="Georgia">Georgia</option>
+                    <option class="font_Times_New_Roman" value="Times New Roman">Times New Roman</option>
+                    <option class="font_Garamond" value="Garamond">Garamond</option>
                 </select>
             </li>
             <li>
@@ -23,10 +42,18 @@
                     <option value="FR">FR</option>
                 </select>
             </li>
+            <li>
+                <label for="automaticCreateNotepad">Automatic notepad creation :</label>
+                <input type="checkbox" id="automaticCreateNotepad">
+            </li>
+            <li>
+                <button id="resetDefaultSettings">Reset default settings</button>
+            </li>
         </ul>
     </main>
 
-    <script type="module" src="js/main.js"></script>
+    <script type="module" src="../js/main.js"></script>
+    <script type="module" src="../js/setting.js"></script>
 </body>
 
 </html>

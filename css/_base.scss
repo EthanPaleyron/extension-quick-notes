@@ -5,6 +5,9 @@
   box-sizing: border-box;
   background-repeat: no-repeat;
 }
+body {
+  overflow: hidden auto;
+}
 article,
 aside,
 details,
@@ -64,6 +67,11 @@ textarea:focus {
 }
 a,
 button {
-  user-select: none;
+  // user-select: none;
   cursor: pointer;
+}
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+  display: none;
 }

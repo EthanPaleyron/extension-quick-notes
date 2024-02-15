@@ -1,49 +1,78 @@
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
     <script src="https://kit.fontawesome.com/2621df78fc.js" crossorigin="anonymous"></script>
+    <title>Quick notes</title>
 </head>
 
 <body>
 
-    <main>
-        <nav>
-            <button>
-                <pre><</pre>
-            </button>
-            <h1>Quick notes</h1>
-            <a href="pages/setting.html">setting</a>
+    <main class="main">
+        <nav class="main__nav">
+            <button id="closeAside" class="main__nav__close_aside"><i class="fa-solid fa-angle-left"></i></button>
+            <h1 class="main__nav__title">Quick notes</h1>
+            <a class="main_nav__setting" href="pages/setting.html"><i class="fa-solid fa-gear"></i></a>
         </nav>
-        <div>
-            <div>
-                <button>Add title</button>
-                <!-- <input type="text" id="inputTitle" class="inputs" placeholder="Title"> -->
-                <button>delete</button>
-                <button>download</button>
-            </div>
-            <nav>
-                <ul>
-                    <li><button>B</button></li>
-                    <li><button>I</button></li>
-                    <li><button>U</button></li>
-                    <li><button>S</button></li>
-                </ul>
-            </nav>
-            <input type="text" id="inputText" class="inputs" placeholder="Write here ...">
+        <div class="main__notepad">
+            <ul class="main__notepad__formats_list">
+                <li>
+                    <input id="inputTitle" class="main__notepad__formats_list__input_add_title inputs" type="text"
+                        placeholder="Add title">
+                    <button id="buttonTitle" class="main__notepad__formats_list__button_add_title">
+                        <h2>Add title</h2><i class="fa-solid fa-pen"></i>
+                    </button>
+                </li>
+                <li>
+                    <div class="main__notepad__formats_list__isolator">|</div>
+                </li>
+                <li><button><i class="fa-solid fa-download"></i></button></li>
+                <li><button id="deleteNotepad"><i class="fa-solid fa-trash"></i></button></li>
+            </ul>
+            <textarea id="inputNotes" class="main__notepad__input_notes inputs" placeholder="Write here ..."></textarea>
         </div>
     </main>
 
     <aside class="aside">
-        <input type="search" class="aside__search" placeholder="Search notepad">
-        <ul id="notepadList" class="aside__notepad_list">
-            <li><button></button></li>
-            <li><button></button></li>
-        </ul>
-        <button class="aside__new_note">+ New note</button>
+        <div>
+            <div class="aside__search">
+                <input id="search" type="search" placeholder="Search notepad">
+                <label id="logoSearch" for="search"></label>
+            </div>
+            <ul id="notepadList" class="aside__notepad_list">
+                <li>
+                    <button id="0">
+                        <input type="hidden" id="title_0" value="new">
+                        <input type="hidden" id="notes_0" value="hehehe">
+                        <span id="notepadTitle_0">new</span>
+                    </button>
+                </li>
+                <li>
+                    <button id="1">
+                        <input type="hidden" id="title_1" value="hello">
+                        <input type="hidden" id="notes_1" value="hihihi">
+                        <span id="notepadTitle_1">hello</span>
+                    </button>
+                </li>
+                <li>
+                    <button id="2">
+                        <input type="hidden" id="title_2" value="comment ca va">
+                        <input type="hidden" id="notes_2" value="je sais pas">
+                        <span id="notepadTitle_2">comment ca va</span>
+                    </button>
+                </li>
+            </ul>
+        </div>
+        <button id="newNotepad" class="aside__new_note b_create">New note</button>
     </aside>
 
     <script type="module" src="js/main.js"></script>
+    <script type="module" src="js/search.js"></script>
+    <script type="module" src="js/aside.js"></script>
+    <script type="module" src="js/setting.js"></script>
 </body>
 
 </html>

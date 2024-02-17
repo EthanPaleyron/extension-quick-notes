@@ -28,6 +28,8 @@ document.querySelectorAll("#notepadList li button").forEach((button) => {
     inputTitle.value = document.querySelector(
       "#title_" + idNotepadSelected
     ).value;
+    document.querySelector("#buttonTitle h2").textContent =
+      document.querySelector("#title_" + idNotepadSelected).value;
     inputNotes.value = document.querySelector(
       "#notes_" + idNotepadSelected
     ).value;
@@ -59,33 +61,10 @@ document.querySelector("#newNotepad").addEventListener("click", () => {
   document.querySelector(
     "#notepadList button#" + idNotepadSelected
   ).style.backgroundColor = "#aaa";
-
-  // Ajoute un gestionnaire d'événements pour le nouveau bouton
-  document
-    .querySelector("#notepadList li #" + idNotepadSelected)
-    .addEventListener("click", () => {
-      console.log(button);
-      if (lastClicked) {
-        lastClicked.style.backgroundColor = "transparent";
-      }
-      button.style.backgroundColor = "#aaa";
-      lastClicked = button;
-
-      idNotepadSelected = button.id;
-      inputTitle.value = document.querySelector(
-        "#title_" + idNotepadSelected
-      ).value;
-      document.querySelector("#buttonTitle h2").textContent =
-        document.querySelector("#title_" + idNotepadSelected).value;
-      inputNotes.value = document.querySelector(
-        "#notes_" + idNotepadSelected
-      ).value;
-    });
 });
 
 // Suppression d'un bloc-note
 document.querySelector("#deleteNotepad").addEventListener("click", () => {
-  console.log("haha");
   remove(document.querySelector("button#" + idNotepadSelected));
 });
 

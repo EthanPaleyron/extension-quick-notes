@@ -1,13 +1,13 @@
 // 🔴font-family
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@600;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Arial:wght@600;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Helvetica:wght@600;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@600;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Lato:wght@600;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Georgia:wght@600;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Times+New+Roman:wght@600;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Garamond:wght@600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto");
+@import url("https://fonts.googleapis.com/css2?family=Arial");
+@import url("https://fonts.googleapis.com/css2?family=Helvetica");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans");
+@import url("https://fonts.googleapis.com/css2?family=Lato");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat");
+@import url("https://fonts.googleapis.com/css2?family=Georgia");
+@import url("https://fonts.googleapis.com/css2?family=Times+New+Roman");
+@import url("https://fonts.googleapis.com/css2?family=Garamond");
 $fonts: (
   Arial,
   Helvetica,
@@ -25,9 +25,6 @@ $fonts: (
   .font_#{$font_name} {
     font-family: $font_name, sans-serif;
   }
-}
-body {
-  font-family: "Roboto", sans-serif;
 }
 
 // 🔴Colors
@@ -59,64 +56,24 @@ $maroon: #85144b;
 // 🔴Texts sizes
 body {
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 500;
 }
 h1 {
+  font-family: sans-serif;
   font-size: 1.5rem;
   font-weight: 700;
 }
 h2 {
-  font-size: 1rem;
-  font-weight: 700;
+  font-size: 1.2rem;
 }
 h3 {
-  font-size: 1.1rem;
-  font-weight: 700;
+  font-size: 1rem;
 }
-
-// 🔴Formats texts
-// .bold {
-//   font-weight: bold;
-// }
-// .italics {
-//   font-style: italic;
-// }
-// .underline {
-//   text-decoration: underline;
-// }
-// .through {
-//   text-decoration: line-through;
-// }
-// .text_start {
-//   text-align: start;
-// }
-// .text_center {
-//   text-align: center;
-// }
-// .text_end {
-//   text-align: end;
-// }
-// .text_justify {
-//   text-align: justify;
-// }
-// .list_inside {
-//   list-style: inside;
-// }
-// .list_disc {
-//   list-style: disc;
-// }
-// .list_square {
-//   list-style: square;
-// }
-// .list_decimal {
-//   list-style: decimal;
-// }
-// .list_roman {
-//   list-style: upper-roman;
-// }
-// .list_alpha {
-//   list-style: lower-alpha;
-// }
+h2,
+h3,
+label {
+  font-weight: 600;
+}
 
 // 🔴Buttons
 %button {

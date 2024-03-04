@@ -5,19 +5,13 @@ const buttonTitle = document.querySelector("#buttonTitle");
 let idNotepadSelected = 0;
 let lastClicked;
 
-// Rajoute un bloc-note automatiquement s'il n'y en a pas encore
-if (notepadList.children.length === 0) {
-  notepadList.innerHTML += createNotepadElement(0);
-  const firstButton = document.querySelector("#notepadList li button");
-  if (firstButton) {
-    firstButton.style.backgroundColor = "#aaa";
-  }
-}
+showData();
 
-// Ajout des gestionnaires d'événements pour chaque bouton
-document.querySelectorAll("#notepadList li button").forEach((button) => {
+// Ajoute un gestionnaire d'événements pour touts les boutons
+const buttons = document.querySelectorAll("#notepadList li button");
+buttons.forEach((button, i) => {
+  button.style.backgroundColor = "transparent";
   button.addEventListener("click", () => {
-    console.log(button);
     if (lastClicked) {
       lastClicked.style.backgroundColor = "transparent";
     }
@@ -28,16 +22,30 @@ document.querySelectorAll("#notepadList li button").forEach((button) => {
     inputTitle.value = document.querySelector(
       "#title_" + idNotepadSelected
     ).value;
+    document.querySelector("#buttonTitle h2").textContent =
+      document.querySelector("#title_" + idNotepadSelected).value;
     inputNotes.value = document.querySelector(
       "#notes_" + idNotepadSelected
     ).value;
-
-    // Envoi des valeurs cachées à l'endroit désiré
-    // Par exemple, vous pouvez les afficher dans la console
-    console.log("Titre:", inputTitle.value);
-    console.log("Notes:", inputNotes.value);
+    // Si il la pas de titre on nomme le bouton = "Add title"
+    if (inputTitle.value.trim() === "") {
+      document.querySelector("#buttonTitle h2").textContent = "Add title";
+    }
   });
+  if (i === buttons.length - 1) {
+    button.style.backgroundColor = "#aaa";
+    lastClicked = button;
+  }
 });
+
+// Rajoute un bloc-note automatiquement s'il n'y en a pas
+if (notepadList.children.length === 0) {
+  notepadList.innerHTML += createNotepadElement(0);
+  const firstButton = document.querySelector("#notepadList li button");
+  if (firstButton) {
+    firstButton.style.backgroundColor = "#aaa";
+  }
+}
 
 // Ajoute un nouveau bloc-note
 document.querySelector("#newNotepad").addEventListener("click", () => {
@@ -56,15 +64,12 @@ document.querySelector("#newNotepad").addEventListener("click", () => {
   idNotepadSelected = maxId + 1;
   const newNotepad = createNotepadElement(idNotepadSelected);
   notepadList.innerHTML += newNotepad;
-  document.querySelector(
-    "#notepadList button#" + idNotepadSelected
-  ).style.backgroundColor = "#aaa";
 
-  // Ajoute un gestionnaire d'événements pour le nouveau bouton
-  document
-    .querySelector("#notepadList li #" + idNotepadSelected)
-    .addEventListener("click", () => {
-      console.log(button);
+  // Ajoute un gestionnaire d'événements pour touts les boutons
+  const buttons = document.querySelectorAll("#notepadList li button");
+  buttons.forEach((button, i) => {
+    button.style.backgroundColor = "transparent";
+    button.addEventListener("click", () => {
       if (lastClicked) {
         lastClicked.style.backgroundColor = "transparent";
       }
@@ -80,13 +85,75 @@ document.querySelector("#newNotepad").addEventListener("click", () => {
       inputNotes.value = document.querySelector(
         "#notes_" + idNotepadSelected
       ).value;
+      // Si il la pas de titre on nomme le bouton = "Add title"
+      if (inputTitle.value.trim() === "") {
+        document.querySelector("#buttonTitle h2").textContent = "Add title";
+      }
     });
+    if (i === buttons.length - 1) {
+      button.style.backgroundColor = "#aaa";
+      lastClicked = button;
+    }
+  });
+  saveData();
 });
 
 // Suppression d'un bloc-note
 document.querySelector("#deleteNotepad").addEventListener("click", () => {
-  console.log("haha");
-  remove(document.querySelector("button#" + idNotepadSelected));
+  const notepadToRemove = document.getElementById(idNotepadSelected);
+  notepadToRemove.remove();
+  // Rajoute un bloc-note automatiquement s'il n'y en a plus
+  if (notepadList.children.length === 0) {
+    inputTitle.value = "";
+    inputNotes.value = "";
+    document.querySelector("#buttonTitle h2").textContent = "Add title";
+    notepadList.innerHTML += createNotepadElement(0);
+    const firstButton = document.querySelector("#notepadList li button");
+    if (firstButton) {
+      firstButton.style.backgroundColor = "#aaa";
+    }
+  } else {
+    const notepadList = document.querySelectorAll("#notepadList li");
+    // Va rechercher l'id le plus grand entre le bloc-note qui a été supprimer
+    let biggerNotepad = 0;
+    notepadList.forEach((notepad) => {
+      if (idNotepadSelected > notepad.id) {
+        // Si l'id du notepad supprimer est plus grand que l'un des notepad
+        if (notepad.id < idNotepadSelected && notepad.id > biggerNotepad) {
+          biggerNotepad = notepad.id;
+          lastClicked = document.querySelector(
+            "#notepadList li button[id='" + notepad.id + "']"
+          );
+        }
+      } else {
+        if (notepad.id > idNotepadSelected && notepad.id > biggerNotepad) {
+          biggerNotepad = notepad.id;
+          lastClicked = document.querySelector(
+            "#notepadList li button[id='" + notepad.id + "']"
+          );
+        }
+      }
+    });
+    idNotepadSelected = biggerNotepad;
+    console.log(idNotepadSelected);
+    const button = document.querySelector(
+      "li > button[id='" + idNotepadSelected + "']"
+    );
+    button.style.backgroundColor = "#aaa";
+    inputTitle.value = document.querySelector(
+      "#title_" + idNotepadSelected
+    ).value;
+    document.querySelector("#buttonTitle h2").textContent =
+      document.querySelector("#title_" + idNotepadSelected).value;
+    inputNotes.value = document.querySelector(
+      "#notes_" + idNotepadSelected
+    ).value;
+    // Si il la pas de titre on nomme le bouton = "Add title"
+    if (inputTitle.value.trim() === "") {
+      document.querySelector("#buttonTitle h2").textContent = "Add title";
+    }
+  }
+  saveData();
 });
 
 // Ajout ou modification du titre
@@ -127,12 +194,13 @@ inputTitle.addEventListener("input", () => {
   titleHidden.value = inputTitle.value;
   // Vérification si le champ est vide, dans ce cas, le nommer "Untitled" + id
   if (inputTitle.value.trim() === "") {
-    notepadTitle.textContent = "Untitled";
+    notepadTitle.textContent = "Untitled " + idNotepadSelected;
     buttonTitle.textContent = "Add title";
   } else {
     buttonTitle.textContent = inputTitle.value;
     notepadTitle.textContent = inputTitle.value;
   }
+  saveData();
 });
 
 // Écoute de l'entrée de texte pour les notes
@@ -143,11 +211,11 @@ inputNotes.addEventListener("input", () => {
 
 // Fonction pour créer un élément de bloc-notes
 function createNotepadElement(id) {
-  return `<li>
+  return `<li id="${id}">
       <button id="${id}">
           <input type="hidden" id="title_${id}" value="">
           <input type="hidden" id="notes_${id}" value="">
-          <span id="notepadTitle_${id}">New notepad</span>
+          <span id="notepadTitle_${id}">Untitled ${id}</span>
       </button>
   </li>`;
 }
@@ -155,4 +223,13 @@ function createNotepadElement(id) {
 function eventTitle(button, title) {
   buttonTitle.style.display = button;
   inputTitle.style.display = title;
+}
+
+function saveData() {
+  localStorage.setItem("notepadList", notepadList.innerHTML);
+}
+
+function showData() {
+  notepadList.innerHTML = localStorage.getItem("notepadList");
+  idNotepadSelected = localStorage.getItem("idNotepadSelected");
 }

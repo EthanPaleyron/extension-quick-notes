@@ -64,7 +64,6 @@ document.querySelector("#newNotepad").addEventListener("click", () => {
   idNotepadSelected = maxId + 1;
   const newNotepad = createNotepadElement(idNotepadSelected);
   notepadList.innerHTML += newNotepad;
-<<<<<<< HEAD
 
   // Ajoute un gestionnaire d'événements pour touts les boutons
   const buttons = document.querySelectorAll("#notepadList li button");
@@ -97,16 +96,13 @@ document.querySelector("#newNotepad").addEventListener("click", () => {
     }
   });
   saveData();
-=======
   document.querySelector(
     "#notepadList button#" + idNotepadSelected
   ).style.backgroundColor = "#aaa";
->>>>>>> a601952d71b81174e405fa2d37b99202b9cd3e89
 });
 
 // Suppression d'un bloc-note
 document.querySelector("#deleteNotepad").addEventListener("click", () => {
-<<<<<<< HEAD
   const notepadToRemove = document.getElementById(idNotepadSelected);
   notepadToRemove.remove();
   // Rajoute un bloc-note automatiquement s'il n'y en a plus
@@ -161,9 +157,7 @@ document.querySelector("#deleteNotepad").addEventListener("click", () => {
     }
   }
   saveData();
-=======
   remove(document.querySelector("button#" + idNotepadSelected));
->>>>>>> a601952d71b81174e405fa2d37b99202b9cd3e89
 });
 
 // Ajout ou modification du titre

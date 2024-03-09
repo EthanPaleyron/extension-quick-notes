@@ -2,13 +2,17 @@ const textarea = document.querySelector("textarea");
 const texts = document.querySelectorAll("body, input, textarea");
 const fontSizeText = document.querySelector("#fontSizeText");
 const fontFamily = document.querySelector("#fontFamily");
+const automaticCreateNotepad = document.querySelector(
+  "#automaticCreateNotepad"
+);
 const sizeMin = 13;
 const sizeMax = 25;
 
 // Fonction pour mettre à jour la taille de la police et la famille de police dans le stockage local
-function updateLocalStorage() {
+function updateLocalStorage(checkbox) {
   localStorage.setItem("fontSize", fontSizeText.value);
   localStorage.setItem("fontFamily", fontFamily.value);
+  localStorage.setItem("automaticCreateNotepad", checkbox);
 }
 
 // Charger les valeurs du stockage local s'ils existent
@@ -30,6 +34,10 @@ document.addEventListener("DOMContentLoaded", function () {
     texts.forEach((text) => {
       text.style.fontFamily = `"${fontFamily.value}", sans-serif`;
     });
+  }
+  if (localStorage.getItem("automaticCreateNotepad")) {
+    automaticCreateNotepad.checked =
+      localStorage.getItem("automaticCreateNotepad") === "true";
   }
 });
 
@@ -56,6 +64,17 @@ fontFamily.addEventListener("change", function () {
     text.style.fontFamily = selectedFont;
   });
   updateLocalStorage();
+});
+
+// Changement de la personalisation de la creation automatique de bloc-note
+let itAuto = true;
+automaticCreateNotepad.addEventListener("change", function () {
+  if (automaticCreateNotepad.checked) {
+    itAuto = true;
+  } else {
+    itAuto = false;
+  }
+  updateLocalStorage(this.checked);
 });
 
 // Réinitialiser les paramètres par défaut

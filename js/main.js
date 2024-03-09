@@ -7,10 +7,38 @@ let lastClicked;
 
 showData();
 
+// Selectionne le bloc-note dernierement utiliser par l'utilisateur
+const lastButtonSelected = document.querySelector(
+  `#notepadList li button[id="${idNotepadSelected}"]`
+);
+
+if (lastButtonSelected) {
+  inputTitle.value = document.querySelector(
+    "#title_" + idNotepadSelected
+  ).value;
+  const inputHidden = document.querySelector("#title_" + idNotepadSelected);
+  const buttonTitle = document.querySelector("#buttonTitle > h2");
+  // Vérification si le champ est vide, dans ce cas, le nommer "Untitled" + id
+  if (inputHidden.value.trim() === "") {
+    buttonTitle.textContent = "Add title";
+  } else {
+    buttonTitle.textContent = inputTitle.value;
+  }
+  inputNotes.value = document.querySelector(
+    "#notes_" + idNotepadSelected
+  ).value;
+  lastButtonSelected.style.backgroundColor = "#aaa";
+}
+
 // Ajoute un gestionnaire d'événements pour touts les boutons
 const buttons = document.querySelectorAll("#notepadList li button");
-buttons.forEach((button, i) => {
-  button.style.backgroundColor = "transparent";
+buttons.forEach((button) => {
+  // Si il n'est pas egale au bouton selectionner on le mets transparent
+  if (button.id !== idNotepadSelected) {
+    button.style.backgroundColor = "transparent";
+  } else {
+    lastClicked = button;
+  }
   button.addEventListener("click", () => {
     if (lastClicked) {
       lastClicked.style.backgroundColor = "transparent";
@@ -31,20 +59,20 @@ buttons.forEach((button, i) => {
     if (inputTitle.value.trim() === "") {
       document.querySelector("#buttonTitle h2").textContent = "Add title";
     }
+    saveLastIdSelected();
   });
-  if (i === buttons.length - 1) {
-    button.style.backgroundColor = "#aaa";
-    lastClicked = button;
-  }
 });
 
 // Rajoute un bloc-note automatiquement s'il n'y en a pas
 if (notepadList.children.length === 0) {
+  idNotepadSelected = 0;
   notepadList.innerHTML += createNotepadElement(0);
   const firstButton = document.querySelector("#notepadList li button");
   if (firstButton) {
     firstButton.style.backgroundColor = "#aaa";
   }
+  saveData();
+  saveLastIdSelected();
 }
 
 // Ajoute un nouveau bloc-note
@@ -64,6 +92,9 @@ document.querySelector("#newNotepad").addEventListener("click", () => {
   idNotepadSelected = maxId + 1;
   const newNotepad = createNotepadElement(idNotepadSelected);
   notepadList.innerHTML += newNotepad;
+  idNotepadSelected = idNotepadSelected;
+  saveData();
+  saveLastIdSelected();
 
   // Ajoute un gestionnaire d'événements pour touts les boutons
   const buttons = document.querySelectorAll("#notepadList li button");
@@ -89,24 +120,31 @@ document.querySelector("#newNotepad").addEventListener("click", () => {
       if (inputTitle.value.trim() === "") {
         document.querySelector("#buttonTitle h2").textContent = "Add title";
       }
+      console.log(idNotepadSelected);
+      saveLastIdSelected();
     });
     if (i === buttons.length - 1) {
       button.style.backgroundColor = "#aaa";
       lastClicked = button;
     }
   });
-  saveData();
   document.querySelector(
     "#notepadList button#" + idNotepadSelected
   ).style.backgroundColor = "#aaa";
+  saveData();
+  saveLastIdSelected();
 });
 
 // Suppression d'un bloc-note
 document.querySelector("#deleteNotepad").addEventListener("click", () => {
-  const notepadToRemove = document.getElementById(idNotepadSelected);
-  notepadToRemove.remove();
-  // Rajoute un bloc-note automatiquement s'il n'y en a plus
+  const notepadList = document.querySelector("#notepadList");
+  const notepads = document.querySelectorAll("#notepadList li");
+  // On supprime le bloc-note selectionner
+  document.querySelector(`li[id="${idNotepadSelected}"`).remove();
+
+  // Si la liste de bloc-note est vide on en recrée une
   if (notepadList.children.length === 0) {
+    idNotepadSelected = 0;
     inputTitle.value = "";
     inputNotes.value = "";
     document.querySelector("#buttonTitle h2").textContent = "Add title";
@@ -116,10 +154,9 @@ document.querySelector("#deleteNotepad").addEventListener("click", () => {
       firstButton.style.backgroundColor = "#aaa";
     }
   } else {
-    const notepadList = document.querySelectorAll("#notepadList li");
     // Va rechercher l'id le plus grand entre le bloc-note qui a été supprimer
     let biggerNotepad = 0;
-    notepadList.forEach((notepad) => {
+    notepads.forEach((notepad) => {
       if (idNotepadSelected > notepad.id) {
         // Si l'id du notepad supprimer est plus grand que l'un des notepad
         if (notepad.id < idNotepadSelected && notepad.id > biggerNotepad) {
@@ -138,7 +175,6 @@ document.querySelector("#deleteNotepad").addEventListener("click", () => {
       }
     });
     idNotepadSelected = biggerNotepad;
-    console.log(idNotepadSelected);
     const button = document.querySelector(
       "li > button[id='" + idNotepadSelected + "']"
     );
@@ -157,7 +193,7 @@ document.querySelector("#deleteNotepad").addEventListener("click", () => {
     }
   }
   saveData();
-  remove(document.querySelector("button#" + idNotepadSelected));
+  saveLastIdSelected();
 });
 
 // Ajout ou modification du titre
@@ -211,6 +247,7 @@ inputTitle.addEventListener("input", () => {
 inputNotes.addEventListener("input", () => {
   const notesHidden = document.querySelector("#notes_" + idNotepadSelected);
   notesHidden.value = inputNotes.value;
+  saveData();
 });
 
 // Fonction pour créer un élément de bloc-notes
@@ -233,7 +270,11 @@ function saveData() {
   localStorage.setItem("notepadList", notepadList.innerHTML);
 }
 
+function saveLastIdSelected() {
+  localStorage.setItem("saveLastIdSelected", idNotepadSelected);
+}
+
 function showData() {
   notepadList.innerHTML = localStorage.getItem("notepadList");
-  idNotepadSelected = localStorage.getItem("idNotepadSelected");
+  idNotepadSelected = localStorage.getItem("saveLastIdSelected");
 }

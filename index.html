@@ -11,41 +11,47 @@
 
 <body>
 
-    <main class="main">
-        <nav class="main__nav">
-            <button id="closeAside" class="main__nav__close_aside"><i class="fa-solid fa-angle-left"></i></button>
-            <h1 class="main__nav__title">Quick notes</h1>
-            <a class="main_nav__setting" href="pages/setting.html"><i class="fa-solid fa-gear"></i></a>
-        </nav>
-        <div class="main__notepad">
-            <ul class="main__notepad__formats_list">
-                <li>
-                    <input id="inputTitle" class="main__notepad__formats_list__input_add_title inputs" type="text"
-                        placeholder="Add title">
-                    <button id="buttonTitle" class="main__notepad__formats_list__button_add_title">
-                        <h2>Add title</h2><i class="fa-solid fa-pen"></i>
-                    </button>
-                </li>
-                <li>
-                    <div class="main__notepad__formats_list__isolator">|</div>
-                </li>
-                <li><button id="downloadNotepad"><i class="fa-solid fa-download"></i></button></li>
-                <li><button id="deleteNotepad"><i class="fa-solid fa-trash"></i></button></li>
-            </ul>
-            <textarea id="inputNotes" class="main__notepad__input_notes inputs" placeholder="Write here ..."></textarea>
-        </div>
-    </main>
-
-    <aside class="aside">
-        <div>
-            <div class="aside__search">
-                <input id="search" type="search" placeholder="Search notepad">
-                <label id="logoSearch" for="search"></label>
+    <div class="content_extension">
+        <aside class="aside">
+            <div>
+                <div class="aside__search">
+                    <input id="search" type="search" placeholder="Search notepad" autocomplete="off">
+                    <label id="logoSearch" for="search"></label>
+                </div>
+                <div class="aside__content">
+                    <ul id="notepadList" class="aside__content__notepad_list"></ul>
+                </div>
             </div>
-            <ul id="notepadList" class="aside__notepad_list"></ul>
-        </div>
-        <button id="newNotepad" class="aside__new_note b_create">New note</button>
-    </aside>
+            <button id="newNotepad" class="aside__new_note b_create">New note</button>
+        </aside>
+
+        <main class="main">
+            <nav class="main__nav">
+                <button id="closeAside" class="main__nav__close_aside"><i class="fa-solid fa-angle-left"></i></button>
+                <h1 class="main__nav__title">Quick notes</h1>
+                <a class="main_nav__setting" href="pages/setting.html"><i class="fa-solid fa-gear"></i></a>
+            </nav>
+            <div class="main__notepad">
+                <ul class="main__notepad__formats_list">
+                    <li>
+                        <input id="inputTitle" class="main__notepad__formats_list__input_add_title inputs" type="text"
+                            placeholder="Add title" autocomplete="off">
+                        <button id="buttonTitle" class="main__notepad__formats_list__button_add_title">
+                            <h2>Add title</h2><i class="fa-solid fa-pen"></i>
+                        </button>
+                    </li>
+                    <li>
+                        <ul class="main__notepad__formats_list__options">
+                            <li><button id="downloadNotepad"><i class="fa-solid fa-download"></i></button></li>
+                            <li><button id="deleteNotepad"><i class="fa-solid fa-trash"></i></button></li>
+                        </ul>
+                    </li>
+                </ul>
+                <textarea id="inputNotes" class="main__notepad__input_notes inputs"
+                    placeholder="Write here ..."></textarea>
+            </div>
+        </main>
+    </div>
 
     <script type="module" src="js/setting.js"></script>
     <script type="module" src="js/main.js"></script>

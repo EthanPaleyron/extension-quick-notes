@@ -1,0 +1,37 @@
+@import "base";
+@import "styles";
+@import "design-tokens";
+
+body {
+  width: 18rem;
+}
+
+.setting {
+  background-color: $primary;
+  padding: 0.7rem;
+  &__title {
+    margin-bottom: 0.5rem;
+    text-align: center;
+  }
+  textarea {
+    overflow: auto;
+    min-width: 15rem;
+    max-width: 15rem;
+    min-height: 4rem;
+    max-height: 4rem;
+    &::-webkit-scrollbar-thumb {
+      background-color: darken($w, 35%);
+    }
+  }
+  &__list {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    li {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+  }
+}

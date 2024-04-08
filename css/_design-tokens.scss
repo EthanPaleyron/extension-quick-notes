@@ -28,14 +28,12 @@ $fonts: (
 }
 
 // 🔴Colors
-$primary: #dedede;
-$secondary: #aaa;
-$tel: #01ff70;
-$mail: #2d95f9;
+$primary: #12495e;
+$secondary: #123443;
 $error: #ff4136;
 $info: #ffdc00;
-$w: #fff;
-$wa: #ffffff5f;
+$w: #f2f2f2;
+$wa: #ffffff2a;
 $b: #000;
 
 // 🔴Other-Colors
@@ -52,6 +50,17 @@ $navy: #001f3f;
 $purple: #b10dc9;
 $fuchsia: #f012be;
 $maroon: #85144b;
+
+body {
+  color: $w;
+}
+
+input,
+textarea,
+select {
+  color: $b;
+  background-color: $w;
+}
 
 // 🔴Texts sizes
 body {
@@ -76,18 +85,33 @@ label {
 }
 
 // 🔴Buttons
-%button {
-  padding: 0.8rem 1.8rem;
-  border-radius: 3rem;
-}
 i {
-  font-size: 1rem;
-  filter: brightness(0) saturate(100%) invert(0%) sepia(81%) saturate(7481%)
-    hue-rotate(164deg) brightness(110%) contrast(101%);
+  font-size: 1.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  filter: brightness(0) saturate(100%) invert(99%) sepia(1%) saturate(452%)
+    hue-rotate(235deg) brightness(113%) contrast(90%);
 }
 .b_create {
-  @extend %button;
-  font-size: 1rem;
+  color: $b;
+  font-size: 0.8rem;
   font-weight: bold;
-  background-color: $wa;
+  text-align: center;
+  text-transform: uppercase;
+  width: 95%;
+  background-color: darken-color($w, 12%);
+  padding: 0.8rem 1.8rem;
+  border-radius: 0.5rem;
+  &:hover {
+    background-color: $w;
+  }
+}
+
+// 🔴Scrollbar
+::-webkit-scrollbar {
+  width: 7px;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 1rem;
 }

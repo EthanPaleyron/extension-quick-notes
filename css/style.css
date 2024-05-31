@@ -1,12 +1,9 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto");
+@import url("https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Gloria+Hallelujah&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Arial");
 @import url("https://fonts.googleapis.com/css2?family=Helvetica");
+@import url("https://fonts.googleapis.com/css2?family=Roboto");
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans");
 @import url("https://fonts.googleapis.com/css2?family=Lato");
-@import url("https://fonts.googleapis.com/css2?family=Montserrat");
-@import url("https://fonts.googleapis.com/css2?family=Georgia");
-@import url("https://fonts.googleapis.com/css2?family=Times+New+Roman");
-@import url("https://fonts.googleapis.com/css2?family=Garamond");
 * {
   color: inherit;
   margin: 0;
@@ -98,9 +95,9 @@ input[type=search]::-webkit-search-cancel-button {
   display: none;
 }
 
-.main__notepad__formats_list__button_add_title, .aside__content__notepad_list li button span {
+.main__notepad__formats_list__button_add_title h2, .aside__content__notepad_list li button span {
   white-space: nowrap;
-  overflow: auto;
+  overflow: hidden;
   text-overflow: ellipsis;
 }
 
@@ -112,28 +109,16 @@ input[type=search]::-webkit-search-cancel-button {
   font-family: Helvetica, sans-serif;
 }
 
+.font_Roboto {
+  font-family: Roboto, sans-serif;
+}
+
 .font_Open Sans {
   font-family: Open Sans, sans-serif;
 }
 
 .font_Lato {
   font-family: Lato, sans-serif;
-}
-
-.font_Montserrat {
-  font-family: Montserrat, sans-serif;
-}
-
-.font_Georgia {
-  font-family: Georgia, sans-serif;
-}
-
-.font_Times New Roman {
-  font-family: Times New Roman, sans-serif;
-}
-
-.font_Garamond {
-  font-family: Garamond, sans-serif;
 }
 
 body {
@@ -153,8 +138,8 @@ body {
 }
 
 h1 {
-  font-family: sans-serif;
-  font-size: 1.5rem;
+  font-family: "Gloria Hallelujah", cursive;
+  font-size: 1.4rem;
   font-weight: 700;
 }
 
@@ -203,14 +188,19 @@ i {
   border-radius: 1rem;
 }
 
+body {
+  background-color: #f2f2f2;
+}
+
 .content_extension {
   width: 35rem;
-  height: 19.5rem;
+  height: 20rem;
   display: flex;
 }
 
 .aside {
   width: 40%;
+  height: 100%;
   background-color: #12495e;
   padding: 0.9rem 1.5rem;
   display: flex;
@@ -243,6 +233,7 @@ i {
   cursor: pointer;
 }
 .aside__search label i {
+  font-size: 1.2rem;
   filter: brightness(0) saturate(100%) invert(0%) sepia(56%) saturate(1847%) hue-rotate(53deg) brightness(95%) contrast(106%);
 }
 .aside__content {
@@ -270,19 +261,19 @@ i {
 .aside__content__notepad_list li button {
   height: -moz-fit-content;
   height: fit-content;
-  width: 98%;
+  width: 100%;
+  max-width: 10.4rem;
   padding: 0.5rem;
+  word-wrap: break-word;
   border-radius: 0.3rem;
 }
-.aside__content__notepad_list li button:hover {
-  background-color: #999999;
-}
 .aside__content__notepad_list li button span {
-  max-width: 2rem;
+  white-space: wrap;
 }
 
 .main {
   width: 60%;
+  height: 100%;
 }
 .main__nav {
   background-color: #123443;
@@ -305,13 +296,14 @@ i {
   display: none;
   font-size: 1rem;
   font-weight: bold;
-  width: 6.4rem;
+  width: 16rem;
   height: 1.4rem;
   padding: 0.4rem;
   border-radius: 0.2rem;
   border: 0;
 }
 .main__notepad__formats_list__button_add_title {
+  max-width: 16rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -323,9 +315,10 @@ i {
 }
 .main__notepad__input_notes {
   width: 100%;
-  height: 14.9rem;
+  height: 14.3rem;
   padding: 0.7rem;
   border: none;
+  background-color: #f2f2f2;
 }
 .main__notepad__input_notes::-webkit-scrollbar-thumb {
   background-color: #999999;

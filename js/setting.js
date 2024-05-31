@@ -1,16 +1,17 @@
 const textarea = document.querySelector("textarea");
-const texts = document.querySelectorAll("body, input, textarea");
+const texts = document.querySelectorAll("*:not(i):not(#fontFamily > option)");
 const fontSizeText = document.querySelector("#fontSizeText");
 const fontFamily = document.querySelector("#fontFamily");
 const automaticCreateNotepad = document.querySelector(
   "#automaticCreateNotepad"
 );
+let sizeValue = 0;
 const sizeMin = 13;
 const sizeMax = 25;
 
 // Fonction pour mettre à jour la taille de la police et la famille de police dans le stockage local
 function updateLocalStorage(checkbox) {
-  localStorage.setItem("fontSize", fontSizeText.value);
+  localStorage.setItem("fontSize", fontSizeText.textContent);
   localStorage.setItem("fontFamily", fontFamily.value);
   localStorage.setItem("automaticCreateNotepad", checkbox);
 }
@@ -18,8 +19,8 @@ function updateLocalStorage(checkbox) {
 // Charger les valeurs du stockage local s'ils existent
 document.addEventListener("DOMContentLoaded", function () {
   if (localStorage.getItem("fontSize")) {
-    fontSizeText.value = localStorage.getItem("fontSize");
-    textarea.style.fontSize = `${fontSizeText.value}px`;
+    fontSizeText.textContent = localStorage.getItem("fontSize");
+    textarea.style.fontSize = `${fontSizeText.textContent}px`;
   } else {
     fontSizeText.value = sizeMin;
     textarea.style.fontSize = `${fontSizeText.value}px`;
@@ -42,16 +43,29 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // Changement de la taille du texte
-fontSizeText.addEventListener("change", () => {
-  if (fontSizeText.value > sizeMin && fontSizeText.value < sizeMax) {
-    textarea.style.fontSize = `${fontSizeText.value}px`;
+document.querySelector("#less").addEventListener("click", () => {
+  if (fontSizeText.textContent > sizeMin) {
+    sizeValue = fontSizeText.textContent;
+    sizeValue--;
+    fontSizeText.textContent = sizeValue;
+    textarea.style.fontSize = `${sizeValue}px`;
     updateLocalStorage();
-  } else if (fontSizeText.value < sizeMin) {
-    fontSizeText.value = sizeMin;
+  } else {
+    fontSizeText.textContent = sizeMin;
     textarea.style.fontSize = `${sizeMin}px`;
     updateLocalStorage();
-  } else if (fontSizeText.value > sizeMax) {
-    fontSizeText.value = sizeMax;
+  }
+});
+
+document.querySelector("#more").addEventListener("click", () => {
+  if (fontSizeText.textContent < sizeMax) {
+    sizeValue = fontSizeText.textContent;
+    sizeValue++;
+    fontSizeText.textContent = sizeValue;
+    textarea.style.fontSize = `${sizeValue}px`;
+    updateLocalStorage();
+  } else {
+    fontSizeText.textContent = sizeMax;
     textarea.style.fontSize = `${sizeMax}px`;
     updateLocalStorage();
   }
@@ -81,8 +95,8 @@ automaticCreateNotepad.addEventListener("change", function () {
 document
   .querySelector("#resetDefaultSettings")
   .addEventListener("click", () => {
-    fontSizeText.value = sizeMin;
-    textarea.style.fontSize = `${fontSizeText.value}px`;
+    fontSizeText.textContent = sizeMin;
+    textarea.style.fontSize = `${sizeMin}px`;
     fontFamily.value = "Roboto";
     texts.forEach((text) => {
       text.style.fontFamily = `"${fontFamily.value}", sans-serif`;

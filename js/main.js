@@ -6,7 +6,9 @@ let idNotepadSelected = 0;
 let lastClicked;
 let lastOvered;
 const colorButtonSelected = "#123443";
-const colorButtonMouseover = "#ffffff3a";
+const colorButtonMouseover = "#ffffff2a";
+
+inputNotes.focus();
 
 showData();
 
@@ -138,6 +140,18 @@ document.querySelector("#newNotepad").addEventListener("click", () => {
       console.log(idNotepadSelected);
       saveLastIdSelected();
     });
+    button.addEventListener("mouseenter", () => {
+      if (button.id !== lastClicked.id) {
+        button.style.backgroundColor = colorButtonMouseover;
+      }
+    });
+    button.addEventListener("mouseleave", () => {
+      if (button.id === lastClicked.id) {
+        button.style.backgroundColor = colorButtonSelected;
+      } else {
+        button.style.backgroundColor = "transparent";
+      }
+    });
     if (i === buttons.length - 1) {
       button.style.backgroundColor = colorButtonSelected;
       lastClicked = button;
@@ -238,8 +252,9 @@ inputTitle.addEventListener("keydown", (e) => {
 // Ajout ou modification du titre
 inputTitle.addEventListener("input", () => {
   // Limite de 20 caractères
-  if (inputTitle.value.length > 20) {
-    inputTitle.value = inputTitle.value.slice(0, 20);
+  const maxCharacter = 50;
+  if (inputTitle.value.length > maxCharacter) {
+    inputTitle.value = inputTitle.value.slice(0, maxCharacter);
   }
   const titleHidden = document.querySelector("#title_" + idNotepadSelected);
   const buttonTitle = document.querySelector("#buttonTitle > h2");

@@ -2,14 +2,19 @@
 @import "styles";
 @import "design-tokens";
 
+body {
+  background-color: $w;
+}
+
 .content_extension {
   width: 35rem;
-  height: 19.5rem;
+  height: 20rem;
   display: flex;
 }
 
 .aside {
   width: 40%;
+  height: 100%;
   background-color: $primary;
   padding: 0.9rem 1.5rem;
   display: flex;
@@ -39,6 +44,7 @@
       align-items: center;
       cursor: pointer;
       i {
+        font-size: 1.2rem;
         filter: brightness(0) saturate(100%) invert(0%) sepia(56%)
           saturate(1847%) hue-rotate(53deg) brightness(95%) contrast(106%);
       }
@@ -65,15 +71,14 @@
         }
         button {
           height: fit-content;
-          width: 98%;
+          width: 100%;
+          max-width: 10.4rem;
           padding: 0.5rem;
+          word-wrap: break-word;
           border-radius: 0.3rem;
-          &:hover {
-            background-color: darken($w, 35%);
-          }
           span {
             @extend %ellipsis;
-            max-width: 2rem;
+            white-space: wrap;
           }
         }
       }
@@ -83,6 +88,7 @@
 
 .main {
   width: 60%;
+  height: 100%;
   &__nav {
     background-color: $secondary;
     padding: 0.5rem 1rem;
@@ -104,18 +110,21 @@
         display: none;
         font-size: 1rem;
         font-weight: bold;
-        width: 6.4rem;
+        width: 16rem;
         height: 1.4rem;
         padding: 0.4rem;
         border-radius: 0.2rem;
         border: 0;
       }
       &__button_add_title {
+        max-width: 16rem;
         display: flex;
         justify-content: center;
         align-items: center;
         gap: 0.4rem;
-        @extend %ellipsis;
+        h2 {
+          @extend %ellipsis;
+        }
       }
       &__options {
         display: flex;
@@ -124,9 +133,10 @@
     }
     &__input_notes {
       width: 100%;
-      height: 14.9rem;
+      height: 14.3rem;
       padding: 0.7rem;
       border: none;
+      background-color: $w;
       &::-webkit-scrollbar-thumb {
         background-color: darken($w, 35%);
       }

@@ -2,8 +2,10 @@ const closeAside = document.querySelector("#closeAside");
 const aside = document.querySelector(".aside");
 const main = document.querySelector(".main");
 const body = document.querySelector("main");
+const inputNotes = document.querySelector("#inputNotes");
 
 closeAside.addEventListener("click", () => {
+  inputNotes.focus();
   if (aside.style.display !== "none") {
     closeAside.style.transform = "rotate(180deg)";
     aside.style.display = "none";

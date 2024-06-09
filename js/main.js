@@ -2,6 +2,9 @@ const notepadList = document.querySelector("#notepadList");
 const inputTitle = document.querySelector("#inputTitle");
 const inputNotes = document.querySelector("#inputNotes");
 const buttonTitle = document.querySelector("#buttonTitle");
+const texts = document.querySelectorAll(
+  "*:not(i):not(#fontFamily > option):not(h1)"
+);
 let idNotepadSelected = 0;
 let lastClicked;
 let lastOvered;
@@ -9,8 +12,17 @@ const colorButtonSelected = "#123443";
 const colorButtonMouseover = "#ffffff2a";
 
 inputNotes.focus();
-
 showData();
+
+// Parametre enregistrer
+if (localStorage.getItem("fontSize")) {
+  inputNotes.style.fontSize = `${localStorage.getItem("fontSize")}px`;
+}
+if (localStorage.getItem("fontFamily")) {
+  texts.forEach((text) => {
+    text.style.fontFamily = localStorage.getItem("fontFamily");
+  });
+}
 
 // Selectionne le bloc-note dernierement utiliser par l'utilisateur
 const lastButtonSelected = document.querySelector(
